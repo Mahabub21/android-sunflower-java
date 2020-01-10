@@ -1,5 +1,7 @@
 package com.zeeroapps.sunflower.workers;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
@@ -11,8 +13,13 @@ import java.io.InputStream;
 import java.util.List;
 
 import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
 public class SeedDatabaseWorker extends Worker {
+    public SeedDatabaseWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
+    }
+
     @NonNull
     @Override
     public Result doWork() {
@@ -28,10 +35,10 @@ public class SeedDatabaseWorker extends Worker {
             }.getType());
             AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
             appDatabase.plantDao().insertAll(plantList);
-            return Result.SUCCESS;
+            return Result.success();
         } catch (Exception e) {
             e.printStackTrace();
-            return Result.FAILURE;
+            return Result.failure();
         }
     }
 }

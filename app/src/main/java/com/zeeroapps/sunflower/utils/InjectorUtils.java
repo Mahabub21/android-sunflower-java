@@ -12,7 +12,6 @@ import com.zeeroapps.sunflower.view_models.PlantListViewModelFactory;
 
 public class InjectorUtils {
 
-
     private static PlantRepository getPlantRepository(Context context) {
         return PlantRepository.getInstance(AppDatabase.getInstance(context).plantDao());
     }
